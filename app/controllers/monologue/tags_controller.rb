@@ -1,40 +1,32 @@
 class Monologue::TagsController < Monologue::ApplicationController
   def show
-    @tag = retrieve_tag
-    if @tag
-      @page = nil
-      @posts = @tag.posts_with_tag
-    else
-      redirect_to :root ,notice: "No post found with label \"#{params[:tag]}\""
-    end
+    tag_str = params[:tag]
+    get_posts_with_tag(tag_str)
   end
 
   def news
     tag_str = 'news'
-    @tag = Monologue::Tag.where("lower(name) = ?", tag_str.mb_chars.to_s.downcase).first
-    if @tag
-      @page = nil
-      @posts = @tag.posts_with_tag
-      render :show
-    else
-      redirect_to :root ,notice: "No post found with label \"#{tag_str}\""
-    end
+    get_posts_with_tag(tag_str)
   end
 
-  def blog
-    tag_str = 'blog'
-    @tag = Monologue::Tag.where("lower(name) = ?", tag_str.mb_chars.to_s.downcase).first
-    if @tag
-      @page = nil
-      @posts = @tag.posts_with_tag
-      render :show
-    else
-      redirect_to :root ,notice: "No post found with label \"#{tag_str}\""
-    end
+  def articles
+    tag_str = 'articles'
+    get_posts_with_tag(tag_str)
   end
 
   private
-  def retrieve_tag
-    Monologue::Tag.where("lower(name) = ?", params[:tag].mb_chars.downcase.to_s).first
+  def get_posts_with_tag(tag_str)
+    @tag = Monologue::Tag.where("lower(name) = ?", tag_str.mb_chars.to_s.downcase).first
+    if @tag
+      @page = nil
+      @posts = @tag.posts_with_tag
+      render :show
+    else
+      redirect_to :root ,notice: "No post found with label \"#{tag_str}\""
+    end
+  end
+
+  def retrieve_tag(tag)
+    Monologue::Tag.where("lower(name) = ?", tag.mb_chars.downcase.to_s).first
   end
 end
