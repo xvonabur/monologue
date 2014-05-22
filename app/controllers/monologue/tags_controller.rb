@@ -16,7 +16,7 @@ class Monologue::TagsController < Monologue::ApplicationController
 
   private
   def get_posts_with_tag(tag_str)
-    @tag = Monologue::Tag.where("lower(name) = ?", tag_str.mb_chars.to_s.downcase).first
+    @tag = retrieve_tag(tag_str)
     if @tag
       @page = nil
       @posts = @tag.posts_with_tag
