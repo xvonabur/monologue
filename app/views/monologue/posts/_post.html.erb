@@ -1,12 +1,16 @@
-<section>
-  <%= render partial: 'monologue/posts/post_header', locals: {post: post} %>
-
-  <div class="content" data-monologue="content">
-    <%= truncate_html(post.content, length: 1000, omission: '...') %>
+<div class="row section">
+  <div class="col-sm-2">
+    <%= render partial: 'layouts/monologue/application/sidebar', locals: {post: post} %>
   </div>
+  <div class="col-sm-8 posts-listing">
+      <section>
+        <%= render partial: 'monologue/posts/post_header', locals: {post: post} %>
 
-  <div class="tags" data-monologue="tags">
-    <%= render post.tags %>
+        <div class="content ckcontent" data-monologue="content">
+          <%= truncate_html(post.content, length: 500, omission: '...') %>
+        </div>
+
+        <%= link_to t(".readmore"), post.full_url, class: "button" %>
+      </section>
   </div>
-  <%= link_to t(".readmore"), post.full_url, class: "button" %>
-</section>
+</div>

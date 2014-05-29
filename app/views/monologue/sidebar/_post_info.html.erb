@@ -1,0 +1,13 @@
+
+ <% unless post.nil? %>
+    <div class="post-info">
+        <div class="section-block text-right">
+            <span data-monologue="time">
+                <time datetime="<%= post.published_at %>">
+                    <%= I18n.localize(post.published_at.to_date, format: :long) %>
+                </time>
+            </span>
+        </div>
+    </div>
+<% end %>
+

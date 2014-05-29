@@ -1,38 +1,20 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<html>
 <head>
-  <%= render 'layouts/monologue/application/head' %>
+  <title><%= full_title(yield(:title)) %></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <div class="container">
-    <header class="main-header sixteen columns clearfix">
-      <%= rss_icon %>
-      <h1><a href="<%= root_path %>"><%=Monologue::Config.site_name%></a></h1>
-      <h2><%=Monologue::Config.site_subtitle%></h2>
-      <%= render partial: "layouts/monologue/application/social_icons" %>
-    </header>
-
-    <div class="content twelve columns">
-      <% flash.each do |name, msg| %>
-        <div class="flash-notice">
-          <%= msg %>
-        </div>
-      <% end %>
-
-      <%= yield %>
-    </div>
-
-      <%= render 'layouts/monologue/application/sidebar' %>
-  </div>
-  <% if content_for?(:footer) %>
-    <footer>
-      <%= yield :footer %>
-    </footer>
-  <% end %>
-  <%= render 'layouts/monologue/application/disqus' %>
-  <%= render 'layouts/monologue/application/gauge_analytics' %>
+<%= render 'layouts/header' %>
+<div class="blog-container container">
+  <%= render partial: "layouts/flash_messages", flash: flash %>
+  <%= yield %>
+</div>
+<%= render 'layouts/footer' %>
 </body>
 </html>

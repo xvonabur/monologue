@@ -1,5 +1,7 @@
-<%= render @posts %>
+<div class="news-body clearfix">
+    <%= render @posts %>
 
-<% if @page %>
-	<%= render partial: "pagination" %>
-<% end %>
+    <% if @page %>
+        <%= render partial: "pagination" %>
+    <% end %>
+</div>

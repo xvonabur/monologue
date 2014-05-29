@@ -1,25 +1,25 @@
-<% content_for :title do %>
-  <%= @post.title %>
-<% end %>
+<div class="news-body clearfix">
+  <div class="row section">
+    <div class="col-sm-2">
+      <%= render partial: 'layouts/monologue/application/sidebar', locals: {post: @post} %>
+    </div>
+    <div class="col-sm-8  posts-listing">
+        <% content_for :title do %>
+          <%= @post.title %>
+        <% end %>
 
-<% content_for :meta_description do %>
-  <%= truncate(strip_tags(@post.content), length: 155) %>
-<% end %>
+        <% content_for :meta_description do %>
+          <%= truncate(strip_tags(@post.content), length: 155) %>
+        <% end %>
 
-<article>
-  <%= render partial: 'monologue/posts/post_header', locals: {post: @post }%>
-  <div class="content" data-monologue="content">
-    <%= raw @post.content %>
+        <article>
+          <%= render partial: 'monologue/posts/post_header', locals: {post: @post }%>
+          <div class="content ckcontent" data-monologue="content">
+            <%= raw @post.content %>
+          </div>
+
+        </article>
+    </div>
   </div>
-
-	<div class="tags" data-monologue="tags">
-    <%= render @post.tags %>
-  </div>
-
-  <%= render "monologue/posts/social_sharing" %>
-
-  <div id="disqus_thread"></div>
-  <%= render 'layouts/monologue/application/disqus_embed' %>
-  <noscript>Please enable JavaScript to view the comments.</noscript>
-</article>
+</div>
 
