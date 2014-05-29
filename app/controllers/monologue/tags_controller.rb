@@ -14,6 +14,12 @@ class Monologue::TagsController < Monologue::ApplicationController
     get_posts_with_tag(tag_str)
   end
 
+  def events
+    tag_str = 'events'
+    get_posts_with_tag(tag_str)
+  end
+
+
   private
   def get_posts_with_tag(tag_str)
     @tag = Monologue::Tag.where("lower(name) = ?", tag_str.mb_chars.to_s.downcase).first
